@@ -1,0 +1,44 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+*.log.*
+lerna-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+.jest/
+
+# Misc
+*.tgz
+*.gz
+*.zip
