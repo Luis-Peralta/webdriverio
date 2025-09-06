@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config({ quiet: true, override: true });
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -62,7 +65,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
