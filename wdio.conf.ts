@@ -1,6 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config({ quiet: true, override: true });
 
+const customConfig = {
+  browserOptions: {
+    headless: process.env.HEADLESS === 'true',
+    fullScreen: process.env.FULLSCREEN === 'true',
+  } 
+};
 export const config: WebdriverIO.Config = {
   //
   // ====================
@@ -55,7 +61,23 @@ export const config: WebdriverIO.Config = {
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: [{
-    browserName: 'chrome'
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+      args: [
+        ...(customConfig.browserOptions.headless ? ['--headless=new', '--disable-gpu'] : []),
+        ...(customConfig.browserOptions.fullScreen ? ['--start-maximized'] : ['--window-size=1920,1080']),
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-infobars',
+        '--disable-extensions',
+        '--disable-notifications',
+        '--disable-popup-blocking',
+        '--disable-web-security',
+        '--ignore-certificate-errors',
+        '--allow-insecure-localhost',
+        '--allow-running-insecure-content'
+      ],
+    }
   }],
 
   //

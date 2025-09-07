@@ -40,6 +40,16 @@ export default class Wdio {
     return browser.getWindowHandles();
   }
 
+  /**
+   * @param selector Selector of the element
+   * @returns Text of the element
+   */
+  static async getText({ selector } : { selector: string }) {
+    const element = await this.getElement(selector);
+    await this.waitForDisplayed(selector);
+    return element.getText();
+  }
+
   // *** WAITS ***
   static async waitForDisplayed(selector: string, timeout = 5000) {
     const element = await this.getElement(selector);

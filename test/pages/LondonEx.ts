@@ -4,7 +4,8 @@ const elements = {
   buttonViewFTSE100: '.tabs-wrapper a[href*="/constituents"]',
   columnCode: '.code [class="indented clickable"]',
   sortByCodeAsc: '.expanded [title="A-Z"]',
-  sortByCodeDesc: '.expanded [title="Z-A"]'
+  sortByCodeDesc: '.expanded [title="Z-A"]',
+  codeValues: '.ftse-index-table-table  a.blue-text',
 };
 
 export default class LondonEx {
@@ -33,6 +34,11 @@ export default class LondonEx {
 
   async sortByCodeAsc() {
     await Wdio.waitAndClick({ selector: elements.sortByCodeAsc });
+  }
+
+  async getFirstCodeValue() {
+    const code = await Wdio.getText({ selector: elements.codeValues });
+    return code;
   }
 
 }

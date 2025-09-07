@@ -11,5 +11,6 @@ describe('LondonEx Page', () => {
     await londonEx.switchToFTSE100Tab();
     await londonEx.clickOnCodeColumn();
     await londonEx.sortByCodeAsc();
+    expect(await londonEx.getFirstCodeValue()).toContain('AA');
   });
 });
