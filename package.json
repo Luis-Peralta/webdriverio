@@ -22,7 +22,8 @@
   },
     "scripts": {
     "wdio": "wdio run ./wdio.conf.ts",
-    "test": "npm run wdio",
+    "test": "npm run wdio -- --spec",
+    "test:grep": "npm run wdio -- --mochaOpts.grep",
     "lint": "eslint \"test/**/*.{ts,tsx,js}\"",
     "fixLint" : "npm run lint -- --fix"
   }

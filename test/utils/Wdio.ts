@@ -21,6 +21,25 @@ export default class Wdio {
     await element.click();
   }
 
+  static async switchToLastTab() {
+    const tabIds = await this.getWindowsTabs();
+    await browser.switchToWindow(tabIds[tabIds.length - 1]);
+  }
+
+  static async switchToTabByUrlMatch(urlPart: string) {
+    await browser.switchWindow(urlPart);
+  }
+
+  // *** DATA ***
+  /**
+   * This method is supposed to be used when we have more than one tab opened
+   * @returns Array with the windows IDs (tabs)
+   */
+  static async getWindowsTabs() {
+    await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1);
+    return browser.getWindowHandles();
+  }
+
   // *** WAITS ***
   static async waitForDisplayed(selector: string, timeout = 5000) {
     const element = await this.getElement(selector);
