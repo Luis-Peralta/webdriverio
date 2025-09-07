@@ -1,3 +1,5 @@
+import Wdio from '../utils/Wdio';
+
 const login = {
     usernameInput: '[data-test="username"]',
     passwordInput: '[data-test="password"]',
@@ -12,22 +14,20 @@ export default class Main {
     url: string;
 
     constructor() {
-        this.url = 'https://www.saucedemo.com/';
+        this.url = process.env.BASE_URL ?? '';
     }
 
     async openUrl(url = this.url) {
-        await browser.url(url);
+        await Wdio.goTo(url);
     }
 
-    async doLogin({ username = process.env.USERNAME || '', password = process.env.PASSWORD || '' } : { username?: string, password?: string } = {}) {
-        console.log(`Logging in with user: ${username} and password: ${password}`);
-        await $(login.usernameInput).setValue(username);
-        await $(login.passwordInput).setValue(password);
-        await $(login.loginButton).click();
-        await browser.pause(3000);
+    async login({ username = process.env.USERNAME || '', password = process.env.PASSWORD || '' } : { username?: string, password?: string } = {}) {
+        await Wdio.waitAndType({ selector: login.usernameInput, text: username });
+        await Wdio.waitAndType({ selector: login.passwordInput, text: password });
+        await Wdio.waitAndClick({ selector: login.loginButton });
     }
 
     async isCartIconDisplayed() {
-        return await $(home.cartIcon).isDisplayed();
+        return Wdio.isElementDisplayed({ selector: home.cartIcon });
     }
 }

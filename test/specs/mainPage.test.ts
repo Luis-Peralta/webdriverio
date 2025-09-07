@@ -5,7 +5,7 @@ describe('Main Page', () => {
     it('should open the main page and login', async () => {
         await main.openUrl();
         await expect(browser).toHaveUrl(main.url);
-        await main.doLogin();
+        await main.login();
         expect(await main.isCartIconDisplayed()).toBeTruthy();
     });
 });
