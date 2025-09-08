@@ -65,7 +65,8 @@ export const config: WebdriverIO.Config = {
     'goog:chromeOptions': {
       args: [
         ...(customConfig.browserOptions.headless ? ['--headless=new', '--disable-gpu'] : []),
-        ...(customConfig.browserOptions.fullScreen ? ['--start-maximized'] : ['--window-size=1920,1080']),
+        ...(customConfig.browserOptions.fullScreen ? ['--start-maximized'] : []),
+        '--window-size=1920,1080',
         '--no-sandbox',
         '--disable-dev-shm-usage',
         '--disable-infobars',
