@@ -1,6 +1,7 @@
 {
-  "name": "Webdriverio",
+  "name": "WebDriverIO-Framework",
   "type": "module",
+  "version": "1.0.0",
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@types/chai": "^5.2.2",
@@ -17,14 +18,18 @@
     "typescript-eslint": "^8.42.0"
   },
   "dependencies": {
+    "chromedriver": "^140.0.0",
     "dotenv": "^17.2.2",
     "jiti": "^2.5.1"
   },
-    "scripts": {
+  "scripts": {
     "wdio": "wdio run ./wdio.conf.ts",
     "test": "npm run wdio -- --spec",
     "test:grep": "npm run wdio -- --mochaOpts.grep",
     "lint": "eslint \"test/**/*.{ts,tsx,js}\"",
-    "fixLint" : "npm run lint -- --fix"
+    "fixLint": "npm run lint -- --fix",
+    "build": "docker build -t wdio-framework:1.0.0 .",
+    "docker": "docker-compose down && docker-compose up -d",
+    "container": "docker compose exec tests bash"
   }
 }

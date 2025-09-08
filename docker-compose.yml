@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  tests:
+    image: wdio-framework:1.0.0
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - chrome
+    stdin_open: true
+    tty: true   
+    command: [ "tail", "-f", "/dev/null" ]
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    shm_size: 2g
+    ports:
+      - "4444:4444"   # Selenium Grid
+      - "7900:7900"   # VNC (http://localhost:7900/?autoconnect=1&resize=scale) for viewing the browser
+    environment:
+      - VNC_PASSWORD=${VNC_PASSWORD}

@@ -14,6 +14,9 @@ export const config: WebdriverIO.Config = {
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
   runner: 'local',
+  hostname: 'chrome',
+  port: 4444,
+  path: '/wd/hub',
   tsConfigPath: './tsconfig.json',
     
   //
@@ -64,10 +67,11 @@ export const config: WebdriverIO.Config = {
     browserName: 'chrome',
     'goog:chromeOptions': {
       args: [
-        ...(customConfig.browserOptions.headless ? ['--headless=new', '--disable-gpu'] : []),
+        ...(customConfig.browserOptions.headless ? ['--headless=new'] : []),
         ...(customConfig.browserOptions.fullScreen ? ['--start-maximized'] : []),
         '--window-size=1920,1080',
         '--no-sandbox',
+        '--disable-gpu',
         '--disable-dev-shm-usage',
         '--disable-infobars',
         '--disable-extensions',
