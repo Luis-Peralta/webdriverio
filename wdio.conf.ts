@@ -7,6 +7,19 @@ const customConfig = {
     fullScreen: process.env.FULLSCREEN === 'true',
   } 
 };
+
+function getDockerConfig() {
+  if (process.env.RUN_WITH_DOCKER === 'true') {
+    return {
+      hostname: 'chrome',
+      port: 4444,
+      path: '/wd/hub',
+    };
+  }
+  return {};
+}
+
+const dockerConfig = getDockerConfig();
 export const config: WebdriverIO.Config = {
   //
   // ====================
@@ -14,9 +27,7 @@ export const config: WebdriverIO.Config = {
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
   runner: 'local',
-  hostname: 'chrome',
-  port: 4444,
-  path: '/wd/hub',
+  ...dockerConfig,
   tsConfigPath: './tsconfig.json',
     
   //
