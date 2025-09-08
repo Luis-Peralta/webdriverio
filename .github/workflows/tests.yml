@@ -26,8 +26,6 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size 2g
-    env:
-      WDIO_HOST: localhost
     steps:
       - uses: oNaiPs/secrets-to-env-action@v1
         with:
