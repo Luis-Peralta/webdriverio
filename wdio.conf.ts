@@ -11,7 +11,7 @@ const customConfig = {
 function getDockerConfig() {
   if (process.env.RUN_WITH_DOCKER === 'true') {
     return {
-      hostname: 'chrome',
+      hostname: 'localhost',
       port: 4444,
       path: '/wd/hub',
     };

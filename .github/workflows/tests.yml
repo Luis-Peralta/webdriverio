@@ -41,6 +41,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Create env file
-        run: echo "${{ vars.ENV }}" > .env   
+        run: |
+          set +x
+          echo "${{ vars.ENV }}" > .env   
       - name: Running Tests
         run: npm run wdio
