@@ -4,6 +4,7 @@ const londonEx = new LondonEx();
 describe('LondonEx Page', () => {
   beforeEach(async () => {
     await londonEx.openUrl();
+    await londonEx.clickOnRejectAllCookies();
   });
 
   it('User should able to order by asc in code table', async () => {
@@ -11,6 +12,6 @@ describe('LondonEx Page', () => {
     await londonEx.switchToFTSE100Tab();
     await londonEx.clickOnCodeColumn();
     await londonEx.sortByCodeAsc();
-    expect(await londonEx.getFirstCodeValue()).toContain('AA');
+    expect((await londonEx.getValueAfterSorting()).startsWith('A')).toBeTruthy();
   });
 });

@@ -60,4 +60,9 @@ export default class Wdio {
     return $(selector).isDisplayed();
   }
 
+  static async waitUntilTextChanges({ selector, text } : { selector: string; text: string }, timeout = 5000) {
+    const element = await this.getElement(selector);
+    await browser.waitUntil(async () => (await element.getText()) !== text, { timeout });
+  }
+
 }

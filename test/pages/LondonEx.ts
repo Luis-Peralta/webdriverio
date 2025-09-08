@@ -6,6 +6,7 @@ const elements = {
   sortByCodeAsc: '.expanded [title="A-Z"]',
   sortByCodeDesc: '.expanded [title="Z-A"]',
   codeValues: '.ftse-index-table-table  a.blue-text',
+  rejectAllCookies: '#onetrust-reject-all-handler'
 };
 
 export default class LondonEx {
@@ -28,6 +29,11 @@ export default class LondonEx {
   }
 
   // ftse-100 page
+
+  async clickOnRejectAllCookies() {
+    await Wdio.waitAndClick({ selector: elements.rejectAllCookies });
+  }
+
   async clickOnCodeColumn() {
     await Wdio.waitAndClick({ selector: elements.columnCode });
   }
@@ -39,6 +45,13 @@ export default class LondonEx {
   async getFirstCodeValue() {
     const code = await Wdio.getText({ selector: elements.codeValues });
     return code;
+  }
+
+  async getValueAfterSorting() {
+    const codeBefore = await this.getFirstCodeValue();
+    await Wdio.waitUntilTextChanges({ selector: elements.codeValues, text: codeBefore });
+    const codeAfter = await this.getFirstCodeValue();
+    return codeAfter;
   }
 
 }
