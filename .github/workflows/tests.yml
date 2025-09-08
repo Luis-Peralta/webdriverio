@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: luisrain/wdio-framework:1.0.0
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     timeout-minutes: 30
     services:
       chrome:
@@ -31,12 +34,7 @@ jobs:
           secrets: ${{ toJSON(secrets) }}
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}          
+          fetch-depth: 0         
       - name: Cache node modules
         uses: actions/cache@v4
         with:
