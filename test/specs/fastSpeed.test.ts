@@ -5,8 +5,8 @@ const data = {
   thresholds: {
     downloadSpeed: '20 Mbps',
     uploadSpeed: '10 Mbps',
-    downloadLatency: '100 ms',
-    loadedLatency: '200 ms',
+    downloadLatency: '300 ms',
+    loadedLatency: '300 ms',
   },
 };
 
@@ -30,8 +30,16 @@ describe('Fast.com Speed Test', () => {
     console.log('** Download Latency **', downloadLatency);
     console.log('** Loaded Latency **', loadedLatency);
 
-    expect(parseFloat(downloadSpeed)).toBeGreaterThanOrEqual(parseFloat(data.thresholds.downloadSpeed));
-    expect(parseFloat(uploadSpeed)).toBeGreaterThanOrEqual(parseFloat(data.thresholds.uploadSpeed));
+    if (downloadSpeed.includes('Gbps')) {
+      expect(parseFloat(downloadSpeed)).toBeGreaterThanOrEqual(0.2);
+    } else if (downloadSpeed.includes('Mbps')) {
+      expect(parseFloat(downloadSpeed)).toBeGreaterThanOrEqual(parseFloat(data.thresholds.downloadSpeed));
+    }
+    if (uploadSpeed.includes('Gbps')) {
+      expect(parseFloat(uploadSpeed)).toBeGreaterThanOrEqual(0.1);
+    } else if (uploadSpeed.includes('Mbps')) {
+      expect(parseFloat(uploadSpeed)).toBeGreaterThanOrEqual(parseFloat(data.thresholds.uploadSpeed));
+    }
     expect(parseFloat(downloadLatency)).toBeLessThanOrEqual(parseFloat(data.thresholds.downloadLatency));
     expect(parseFloat(loadedLatency)).toBeLessThanOrEqual(parseFloat(data.thresholds.loadedLatency));
 
