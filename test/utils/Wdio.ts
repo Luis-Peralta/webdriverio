@@ -65,4 +65,11 @@ export default class Wdio {
     await browser.waitUntil(async () => (await element.getText()) !== text, { timeout });
   }
 
+  static async waitUntilClassChanges({ selector, className } : { selector: string; className: string }, timeout = 5000) {
+    const element = await this.getElement(selector);
+    await browser.waitUntil(async () => {
+      const classValue = await element.getAttribute('class');
+      return classValue?.includes(className);
+    },{ timeout });
+  }
 }
